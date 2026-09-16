@@ -6,6 +6,8 @@ import lombok.*;
 
 import javax.swing.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -45,6 +47,13 @@ public class User {
             length = 9
     )
     private String phoneNumber;
+
+    @OneToMany(
+            mappedBy = "owner",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Property> properties = new ArrayList<>();
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
