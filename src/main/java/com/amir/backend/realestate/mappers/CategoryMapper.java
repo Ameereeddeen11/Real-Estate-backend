@@ -18,6 +18,7 @@ import java.util.List;
 public interface CategoryMapper {
     @Mapping(
             target = "propertyCount",
+            source = "properties",
             qualifiedByName = "calculatePropertyCount"
     )
     CategoryDto toDto(Category category);
@@ -28,11 +29,8 @@ public interface CategoryMapper {
             return 0;
         } else {
             return properties.stream()
-                    .filter(
-                            property -> PropertyStatus.PUBLISHED.equals(
-                                    properties.getStatus()
-                            )
-                    ).count();
+                    .filter(property -> PropertyStatus.PUBLISHED.equals(property.getStatus()))
+                    .count();
         }
     }
 }

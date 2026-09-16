@@ -1,7 +1,6 @@
 package com.amir.backend.realestate.controllers;
 
 import com.amir.backend.realestate.domain.dtos.CategoryDto;
-import com.amir.backend.realestate.domain.entities.Category;
 import com.amir.backend.realestate.mappers.CategoryMapper;
 import com.amir.backend.realestate.services.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +20,11 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<List<CategoryDto>> listCategories() {
-        // ToDo: Implement the logic to list categories
-        List<Category> categories = categoryService.listCategories();
-        return ResponseEntity.ok(List.of());
+        List<CategoryDto> categories = categoryService.listCategories()
+                .stream()
+                .map(categoryMapper::toDto)
+                .toList();
+
+        return ResponseEntity.ok(categories);
     }
 }

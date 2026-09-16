@@ -33,11 +33,11 @@ public class Category {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return Objects.equals(id, category.id) && Objects.equals(name, category.name);
+        return Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(properties, category.properties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, properties);
     }
 }
